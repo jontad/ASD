@@ -55,60 +55,14 @@ class CreditCard implements PaymentMethod {
 
 }
 
-/********************* Account *********************/
-
-abstract class Account {
-
-    private String email;
-    private String password;
-    private boolean adminAccountStatus = false;
 
 
-    public Account(String email, String password, boolean adminAccountStatus) {
-        this.email = email;
-        this.password = password;
-        this.adminAccountStatus = adminAccountStatus;
-    }
 
-    public boolean getAdminAccountStatus() {
-        return false;
-    }
 
-    public boolean signIn(User user) {
-        return true;
-    }
-
-    public boolean signOut(User user) {
-        return true;
-    }
-}
-
-class UserAccount extends Account {
-
-    public UserAccount(String email, String password) {
-        super(email, password, false);
-    }
-
-}
-
-class AdminAccount extends Account {
-
-    public AdminAccount(String email, String password) {
-        super(email, password, true);
-    }
-
-    public void deleteUserAccount(UserAccount account) {
-
-    }
-
-    public void sendWarning(UserAccount account) {
-
-    }
-}
 
 /********************* MATCH *********************/
 
-class Match{
+class Match {
     public boolean liked;
     public String id; 
 
