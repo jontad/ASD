@@ -58,12 +58,17 @@ class Login {
         System.out.println(message);    
     }
 
+    private void redirectToMainScreen(){
+        System.out.println("----- Redirect to main screen -----");
+    }
+
     public void signIn(Server server, String email, String password) {
         boolean validated = this.validateEmailAndPassword(server, email, password);
 
         if(validated){
             System.out.println("Sign in succesful!");
-            System.out.println("----- Redirect to main screen -----");
+            this.redirectToMainScreen();
+
         } else {
             this.displayErrorMessage("Login failed");
         }
