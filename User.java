@@ -118,7 +118,68 @@ class Match{
     }
 }
 
+
+
+
+/********************* ACCOUNTING *********************/
+
+class Accounting {
+    private LineItem[] lineItems;
+
+    private class LineItem {
+        public boolean paidStatus;
+    
+    }
+
+    
+    /******** FEATURES ********/
+    enum Features {
+        none, 
+        rewind,
+        moreSwipes,
+        profileBoost,
+        superLike,
+    }
+    public class PaidFeatures extends LineItem {
+        private Features features;
+
+        public PaidFeatures(){
+            this.features = Features.none;
+        }
+
+        public boolean payFeatures(){
+            return true;
+        }
+    
+    }
+
+    /******** SUBSCRIPTION ********/
+    enum SubscriptionTiers {
+        none, 
+        monthly,
+        yearly
+    }
+    public class Subscription extends LineItem  {
+        private SubscriptionTiers subscription;
+
+        private Subscription(){
+            this.subscription = SubscriptionTiers.none;
+        }
+
+        public boolean payMonthlySubscription(){
+            return true;
+        }
+
+        public boolean payYearlySubscription(){
+            return true;
+        }
+    
+    }
+
+}
+
 /********************* USER *********************/
+
 
 
 public class User {
@@ -164,3 +225,4 @@ public class User {
     }
 
 }
+
