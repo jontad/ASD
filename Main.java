@@ -21,7 +21,6 @@ class Server  {
         this.db = new Database();
     }
 
-
     public void setAccountToDB(Account account){
         try {  
             HashMap<String, Account> accounts = this.db.getAccounts();
