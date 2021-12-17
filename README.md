@@ -1,8 +1,7 @@
 
-Compile and run program by writing: 
+Compile and run User.java by writing: 
 
 ```
 make run 
 ```
 
-All classes are in User.java
