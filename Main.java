@@ -23,8 +23,13 @@ class Server  {
 
 
     public void setAccountToDB(Account account){
-        HashMap<String, Account> accounts = this.db.getAccounts();
-        //accounts.put(account.getEmail(), account);
+        try {  
+            HashMap<String, Account> accounts = this.db.getAccounts();
+            accounts.put(account.getEmail(), account);
+        } catch (NullPointerException e) {
+            System.out.println("Could not put account into database");
+        }
+
     }
 
 
