@@ -5,10 +5,10 @@ public class AdminAccount extends Account {
     }
 
     public void deleteUserAccount(UserAccount account) {
-
+        return;
     }
 
     public void sendWarning(UserAccount account) {
-
+        return;
     }
 }

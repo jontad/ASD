@@ -1,3 +1,5 @@
+import java.util.List;
+import java.util.stream.Collectors;
 
 /********************* PAYMENT METHOD *********************/
 
@@ -41,7 +43,7 @@ class CreditCard implements PaymentMethod {
     private int cvc;
     public String name;
 
-    public CreditCard(String creditCardNrNumber,  String expiredDate, int cvc, String name) {
+    public CreditCard(String creditCardNrNumber, String expiredDate, int cvc, String name) {
         this.creditCardNrNumber = creditCardNrNumber;
         this.expiredDate = expiredDate;
         this.cvc = cvc;
@@ -55,86 +57,103 @@ class CreditCard implements PaymentMethod {
 
 }
 
-
-
-
-
-
 /********************* MATCH *********************/
 
 class Match {
     public boolean liked;
-    public String id; 
+    public String id;
 
-    public Match(boolean liked, String id){
+    public Match(boolean liked, String id) {
         this.liked = liked;
         this.id = id;
     }
 }
 
-
-
-
 /********************* ACCOUNTING *********************/
 
 class Accounting {
-    private LineItem[] lineItems;
+    private List<LineItem> lineItems;
 
-    private class LineItem {
-        public boolean paidStatus;
-    
+    public Accounting(List<LineItem> lineItems) {
+        this.lineItems = lineItems;
     }
 
-    
+    private class LineItem {
+        private boolean unpaid;
+
+        public LineItem() {
+            this.unpaid = true;
+        }
+
+        public boolean unpaid() {
+            return this.unpaid;
+        }
+
+        public void payLineItem() {
+            this.unpaid = false;
+        }
+    }
+
+    public List<LineItem> getUnpaidLineItems() {
+
+        List<LineItem> unpaidLineItems = this.lineItems.stream()
+                .filter(lineItem -> lineItem.unpaid() == true)
+                .collect(Collectors.toList());
+
+        return unpaidLineItems;
+    }
+
     /******** FEATURES ********/
     enum Features {
-        none, 
+        none,
         rewind,
         moreSwipes,
         profileBoost,
         superLike,
     }
+
     public class PaidFeatures extends LineItem {
         private Features features;
 
-        public PaidFeatures(){
+        public PaidFeatures() {
             this.features = Features.none;
         }
 
-        public boolean payFeatures(){
+        public boolean payFeatures() {
             return true;
         }
-    
+
     }
 
     /******** SUBSCRIPTION ********/
-    enum SubscriptionTiers {
-        none, 
+    enum SubscriptionTier {
+        none,
         monthly,
         yearly
     }
-    public class Subscription extends LineItem  {
-        private SubscriptionTiers subscription;
 
-        private Subscription(){
-            this.subscription = SubscriptionTiers.none;
+    public class Subscription extends LineItem {
+        private SubscriptionTier subscription;
+
+        private Subscription() {
+            this.subscription = SubscriptionTier.none;
         }
 
-        public boolean payMonthlySubscription(){
+        public boolean payMonthlySubscription() {
+            this.subscription = SubscriptionTier.monthly;
             return true;
         }
 
-        public boolean payYearlySubscription(){
+        public boolean payYearlySubscription() {
+            this.subscription = SubscriptionTier.yearly;
             return true;
         }
-    
+
     }
 
 }
 
 /********************* USER *********************/
-
-
 
 public class User {
 
@@ -149,16 +168,15 @@ public class User {
     public Match[] matches;
 
     public User(String name, int age, int userID,
-                String location, String language, 
-                PaymentMethod[] paymentMethods, Match[] matches
-                )
-    {
+            String location, String language,
+            PaymentMethod[] paymentMethods, Match[] matches) {
         this.name = name;
         this.age = age;
         this.userID = userID;
         this.location = location;
         this.language = language;
         this.paymentMethods = paymentMethods;
+        this.matches = matches;
     }
 
     public User getMatch(User user) {
@@ -179,4 +197,3 @@ public class User {
     }
 
 }
-

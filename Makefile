@@ -1,6 +1,13 @@
-compile:
-	javac User.java
+compileUser:
+	javac User.java 
 
-run: compile
+compileMain:
+	javac Main.java
+
+user: compileUser
 	java User
+
+main: compileMain
+	java Main
+	
 
