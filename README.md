@@ -1,7 +1,11 @@
-
-Compile and run User.java by writing: 
+Compile and run User.java by writing:
 
 ```
-make run 
+make user
 ```
 
+Compile and run Main.java by writing:
+
+```
+make main
+```
